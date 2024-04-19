@@ -1,0 +1,205 @@
+@startuml
+title System Class Diagram
+
+package app {
+  package Console {
+    class Kernel {
+      + schedule(Schedule $schedule)
+    }
+  }
+  package Exceptions {
+    class Handler {
+      + register()
+    }
+  }
+  package Http {
+    package Controllers {
+      abstract class Controller extends BaseController {
+        + __construct() (optional)
+      }
+      class HomeController extends Controller {
+        + index()
+      }
+      package Admin {
+        class AuditLogsController extends Controller {
+          + function index(Request $request)
+          +function show(AuditLog $auditLog)
+        }
+        class CategoriesController extends Controller {
+          + function index(Request $request)
+          + function show(AuditLog $auditLog)
+          + function store(StoreCategoryRequest $request)
+			+ function edit(Category $category)
+			+ function update(UpdateCategoryRequest $request, Category $category)
+			+ function show(Category $category)
+			+ function destroy(Category $category)
+			+ function massDestroy(MassDestroyCategoryRequest)
+        }
+        class CommentsController extends Controller {
+                    + function index()
+					+ function create()
+					+ function store(StoreCategoryRequest $request)
+					+ function edit(Comment $comment)
+					+ function update(UpdateCommentRequest $request, Comment $comment)
+					+ function show(Comment $comment)
+					+ function destroy(Comment $comment)
+					function massDestroy(MassDestroyCommentRequest $request)
+        }
+        class HomeController extends Controller {
+                    +function index()
+        }
+        class PermissionsController  extends Controller {
+            					+function index()
+					+function create()
+					+function store(StorePermissionRequest $request)
+					+function edit(Permission $permission)
+					+function update(UpdatePermissionRequest $request, Permission $permission)
+					+function show(Permission $permission)
+					+function destroy(Permission $permission)
+					+function massDestroy(MassDestroyPermissionRequest $request)
+        }
+        class PrioritiesController extends Controller {
+            					+function index()
+					+function create()
+					+function store(StorePriorityRequest $request)
+					+function edit(Priority $priority)
+					+function update(UpdatePriorityRequest $request, Priority $priority)
+					+function show(Priority $priority)
+					+function destroy(Priority $priority)
+					+function massDestroy(MassDestroyPriorityRequest $request)
+        }
+        class RolesController extends Controller {
+					+function index()
+					+function create()
+					+function store(StoreRoleRequest $request)
+					+function edit(Role $role)
+					+function update(UpdateRoleRequest $request, Role $role)
+					+function show(Role $role)
+					+function destroy(Role $role)
+					+function massDestroy(MassDestroyRoleRequest $request)
+        }
+        class PermissionsController extends Controller {
+                    +function index()
+					+function create()
+					+function store(StoreRoleRequest $request)
+					+function edit(Role $role)
+					+function update(UpdateRoleRequest $request, Role $role)
+					+function show(Role $role)
+					+function destroy(Role $role)
+					+function massDestroy(MassDestroyRoleRequest $request)
+        }
+        class StatusesController  extends Controller {
+            +function index()
+					+function create()
+					+function store(StoreStatusRequest $request)
+					+function edit(Status $status)
+					+function update(UpdateStatusRequest $request, Status $status)
+					+function show(Status $status)
+					+function destroy(Status $status)
+					+function massDestroy(MassDestroyStatusRequest $request)
+        }
+        class TicketController  extends Controller {
+            					+function create()
+					+function store(Request $request)
+					+function show(Ticket $ticket)
+					+function storeComment(Request $request, Ticket $ticket)
+					+function index()
+        }
+        class TicketsController extends Controller {
+            +function index(Request $request)
+					+function create()
+					+function store(StoreTicketRequest $request)
+					+function edit(Ticket $ticket)
+					+function update(UpdateTicketRequest $request, Ticket $ticket)
+					+function show(Ticket $ticket)
+					+function massDestroy(MassDestroyTicketRequest $request)
+					+function storeComment(Request $request, Ticket $ticket)
+        }
+        class UsersController extends Controller {
+            +function index()
+					+function create()
+					+function store(StoreUserRequest $request)
+					+function edit(User $user)
+					+function update(UpdateUserRequest $request, User $user)
+					+function show(User $user)
+					+function destroy(User $user)
+					+function massDestroy(MassDestroyUserRequest $request)
+        }
+      package Api\V1\Admin {
+
+      }
+      package Auth {
+
+      }
+    }
+    class Request
+  }
+  package Middleware {
+    abstract class Middleware
+    class Authenticate
+    class AuthGates
+    class CheckForMaintenanceMode
+    class EncryptCookies
+    class RedirectIfAuthenticated
+    class SetLocale
+    class TrimStrings
+    class TrustProxies
+    class VerifyCsrfToken
+  }
+  package Notifications {
+    class AssignedTicketNotification
+    class CommentEmailNotification
+    class DataChangeEmailNotification
+  }
+  package Observers {
+    class TicketActionObserver
+  }
+  package Providers {
+    class AppServiceProvider
+    class AuthServiceProvider
+    class BotServiceProvider
+    class BroadcastServiceProvider
+    class EventServiceProvider
+    class RouteServiceProvider
+  }
+  package Scopes {
+    class AgentScope
+  }
+  package Traits {
+    class Auditable
+    class AuditLog
+    class Category
+    class Comment
+    class Permission
+    class Priority
+    class Role
+    class Status
+    class Ticket
+    class User
+    class MediaUploading
+  }
+}
+
+package config {
+  class Config {
+    + ... (attributes omitted for brevity)
+  }
+}
+
+package database {
+  package factories {
+    class UserFactory
+  }
+  package migrations {
+
+  }
+  package seeds {
+
+  }
+}
+
+package routes {
+
+}
+
+@enduml
